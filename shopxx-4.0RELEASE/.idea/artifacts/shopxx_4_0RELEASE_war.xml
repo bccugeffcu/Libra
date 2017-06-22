@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="shopxx-4.0RELEASE:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/shopxx_4_0RELEASE_war</output-path>
+    <root id="archive" name="shopxx-4.0RELEASE_war.war">
+      <element id="artifact" artifact-name="shopxx-4.0RELEASE:war exploded" />
+    </root>
+  </artifact>
+</component>
