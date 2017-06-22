@@ -29,7 +29,7 @@ public class CartJob {
 	/**
 	 * 清除过期购物车
 	 */
-	@Scheduled(cron = "${job.cart_evict_expired.cron}")
+//	@Scheduled(cron = "${job.cart_evict_expired.cron}")
 	public void evictExpired() {
 		cartService.evictExpired();
 	}

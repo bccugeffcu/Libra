@@ -29,7 +29,7 @@ public class OrderJob {
 	/**
 	 * 释放过期订单库存
 	 */
-	@Scheduled(cron = "${job.order_release_stock.cron}")
+//	@Scheduled(cron = "${job.order_release_stock.cron}")
 	public void releaseStock() {
 		orderService.releaseStock();
 	}

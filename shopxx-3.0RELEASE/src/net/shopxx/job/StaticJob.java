@@ -29,7 +29,7 @@ public class StaticJob {
 	/**
 	 * 生成静态
 	 */
-	@Scheduled(cron = "${job.static_build.cron}")
+//	@Scheduled(cron = "${job.static_build.cron}")
 	public void build() {
 		staticService.buildAll();
 	}

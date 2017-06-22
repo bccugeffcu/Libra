@@ -63,7 +63,7 @@ public class AdPositionDirective extends BaseDirective {
 					Writer out = env.getOut();
 					new Template("adTemplate", new StringReader(adPosition.getTemplate()), freeMarkerConfigurer.getConfiguration()).process(model, out);
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(); 
 				}
 			}
 		}

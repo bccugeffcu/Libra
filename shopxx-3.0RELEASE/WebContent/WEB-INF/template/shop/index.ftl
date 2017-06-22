@@ -3,8 +3,13 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 [@seo type = "index"]
-	<title>[#if seo.title??][@seo.title?interpret /][#else]${message("shop.index.title")}[/#if]</title>
-	
+	<title>
+		[#if seo.title??]
+			[@seo.title?interpret /]
+		[#else]
+			${message("shop.index.title")}
+		[/#if]
+	</title>
 	
 	[#if seo.keywords??]
 		<meta name="keywords" content="[@seo.keywords?interpret /]" />
