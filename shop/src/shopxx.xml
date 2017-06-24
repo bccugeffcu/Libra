@@ -2,7 +2,7 @@
 
 <shopxx> 
 	<setting name="siteName" value="商城"/>  
-	<setting name="siteUrl" value="http://localhost:8080"/>  
+	<setting name="siteUrl" value="http://localhost:8080/shop"/>  
 	<setting name="logo" value="/upload/image/logo.gif"/>  
 	<setting name="hotSearch" value="苹果,三星,索尼,华为,魅族,佳能,华硕,美的,格力"/>  
 	<setting name="address" value="湖北武汉"/>  
