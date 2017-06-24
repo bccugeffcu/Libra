@@ -26,9 +26,7 @@ import net.shopxx.entity.MemberRank;
 import net.shopxx.entity.PointLog;
 import net.shopxx.service.MailService;
 import net.shopxx.service.MemberService;
-import net.shopxx.service.SmsService;
 import net.shopxx.util.SystemUtils;
-
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -50,8 +48,8 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 	private PointLogDao pointLogDao;
 	@Resource(name = "mailServiceImpl")
 	private MailService mailService;
-	@Resource(name = "smsServiceImpl")
-	private SmsService smsService;
+//	@Resource(name = "smsServiceImpl")
+//	private SmsService smsService;
 
 	@Transactional(readOnly = true)
 	public boolean usernameExists(String username) {
@@ -228,7 +226,7 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
 
 		Member pMember = super.save(member);
 		mailService.sendRegisterMemberMail(pMember);
-		smsService.sendRegisterMemberSms(pMember);
+//		smsService.sendRegisterMemberSms(pMember);
 		return pMember;
 	}
 

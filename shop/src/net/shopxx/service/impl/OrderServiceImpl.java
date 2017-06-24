@@ -56,9 +56,7 @@ import net.shopxx.service.MemberService;
 import net.shopxx.service.OrderService;
 import net.shopxx.service.ProductService;
 import net.shopxx.service.ShippingMethodService;
-import net.shopxx.service.SmsService;
 import net.shopxx.util.SystemUtils;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
@@ -98,8 +96,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 	private ShippingMethodService shippingMethodService;
 	@Resource(name = "mailServiceImpl")
 	private MailService mailService;
-	@Resource(name = "smsServiceImpl")
-	private SmsService smsService;
+//	@Resource(name = "smsServiceImpl")
+//	private SmsService smsService;
 
 	@Transactional(readOnly = true)
 	public Order findBySn(String sn) {
@@ -563,7 +561,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		}
 
 		mailService.sendCreateOrderMail(order);
-		smsService.sendCreateOrderSms(order);
+//		smsService.sendCreateOrderSms(order);
 
 		if (!cart.isNew()) {
 			cartDao.remove(cart);
@@ -597,7 +595,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendUpdateOrderMail(order);
-		smsService.sendUpdateOrderSms(order);
+//		smsService.sendUpdateOrderSms(order);
 	}
 
 	public void cancel(Order order) {
@@ -618,7 +616,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendCancelOrderMail(order);
-		smsService.sendCancelOrderSms(order);
+//		smsService.sendCancelOrderSms(order);
 	}
 
 	public void review(Order order, boolean passed, Admin operator) {
@@ -643,7 +641,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendReviewOrderMail(order);
-		smsService.sendReviewOrderSms(order);
+//		smsService.sendReviewOrderSms(order);
 	}
 
 	public void payment(Order order, Payment payment, Admin operator) {
@@ -681,7 +679,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendPaymentOrderMail(order);
-		smsService.sendPaymentOrderSms(order);
+//		smsService.sendPaymentOrderSms(order);
 	}
 
 	public void refunds(Order order, Refunds refunds, Admin operator) {
@@ -711,7 +709,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendRefundsOrderMail(order);
-		smsService.sendRefundsOrderSms(order);
+//		smsService.sendRefundsOrderSms(order);
 	}
 
 	public void shipping(Order order, Shipping shipping, Admin operator) {
@@ -762,7 +760,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendShippingOrderMail(order);
-		smsService.sendShippingOrderSms(order);
+//		smsService.sendShippingOrderSms(order);
 	}
 
 	public void returns(Order order, Returns returns, Admin operator) {
@@ -794,7 +792,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendReturnsOrderMail(order);
-		smsService.sendReturnsOrderSms(order);
+//		smsService.sendReturnsOrderSms(order);
 	}
 
 	public void receive(Order order, Admin operator) {
@@ -811,7 +809,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendReceiveOrderMail(order);
-		smsService.sendReceiveOrderSms(order);
+//		smsService.sendReceiveOrderSms(order);
 	}
 
 	public void complete(Order order, Admin operator) {
@@ -848,7 +846,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendCompleteOrderMail(order);
-		smsService.sendCompleteOrderSms(order);
+//		smsService.sendCompleteOrderSms(order);
 	}
 
 	public void fail(Order order, Admin operator) {
@@ -869,7 +867,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 		orderLogDao.persist(orderLog);
 
 		mailService.sendFailOrderMail(order);
-		smsService.sendFailOrderSms(order);
+//		smsService.sendFailOrderSms(order);
 	}
 
 	@Override

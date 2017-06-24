@@ -44,8 +44,8 @@ public class SettingController extends BaseController {
 	private FileService fileService;
 	@Resource(name = "mailServiceImpl")
 	private MailService mailService;
-	@Resource(name = "smsServiceImpl")
-	private SmsService smsService;
+//	@Resource(name = "smsServiceImpl")
+//	private SmsService smsService;
 	@Resource(name = "cacheServiceImpl")
 	private CacheService cacheService;
 	@Resource(name = "staticServiceImpl")
@@ -91,11 +91,11 @@ public class SettingController extends BaseController {
 	@RequestMapping(value = "/sms_balance", method = RequestMethod.GET)
 	public @ResponseBody
 	Message smsBalance() {
-		long balance = smsService.getBalance();
-		if (balance < 0) {
-			return Message.warn("admin.setting.smsInvalid");
-		}
-		return Message.success("admin.setting.smsBalanceResult", balance);
+//		long balance = smsService.getBalance();
+//		if (balance < 0) {
+//			return Message.warn("admin.setting.smsInvalid");
+//		}
+		return Message.success("admin.setting.smsBalanceResult", "admin.setting.smsInvalid");
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

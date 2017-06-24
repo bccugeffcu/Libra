@@ -18,8 +18,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/IKAnalyzer2012_u6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jcaptcha-1.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/emayclient-4.3.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
