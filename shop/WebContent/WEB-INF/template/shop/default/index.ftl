@@ -78,7 +78,7 @@ $().ready(function() {
 						<ul>
 							[#list productCategories as productCategory]
 								<li>
-									[@product_category_children_list productCategoryId = productCategory.id recursive = false count = 3]
+								  [@product_category_children_list productCategoryId = productCategory.id recursive = false count = 3]
 										<div class="item[#if !productCategory_has_next] last[/#if]">
 											<div>
 												[#list productCategories as productCategory]

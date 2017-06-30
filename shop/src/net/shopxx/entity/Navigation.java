@@ -82,4 +82,8 @@ public class Navigation extends OrderEntity<Long> {
 		this.isBlankTarget = isBlankTarget;
 	}
 
+	public static void main(String[] args) {
+		Position a  =Navigation.Position.top;
+		System.out.println(a);
+	}
 }
