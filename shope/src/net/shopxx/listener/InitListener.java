@@ -56,6 +56,10 @@ public class InitListener implements ServletContextAware, ApplicationListener<Co
 				} else {
 					staticService.generateIndex();
 					staticService.generateOther();
+					staticService.generateAll();
+					searchService.purge();
+					searchService.index();
+					installInitConfigFile.delete();
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
