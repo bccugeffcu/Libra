@@ -3,6 +3,6 @@
 /applicationContext.xml
 /ehcache.xml
 /logback.xml
-/net/
+/net
 /shopxx.properties
 /shopxx.xml
