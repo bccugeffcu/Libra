@@ -1,1 +1,12 @@
+<<<<<<< HEAD
 /net/
+=======
+/applicationContext-mvc.xml
+/applicationContext-shiro.xml
+/applicationContext.xml
+/ehcache.xml
+/logback.xml
+/net
+/shopxx.properties
+/shopxx.xml
+>>>>>>> d66ccfc808efcd0325b53fff914ba74dce380c43
