@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/cart_menu_detail.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/head.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/nav.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/nav1.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/top.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/user_dialog_login.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/shop/wap/footer.html=UTF-8
+encoding//WebRoot/WEB-INF/templates/zh_cn/system/user/default/usercenter/seller_order_shipping.html=UTF-8
+encoding/<project>=UTF-8
+separateDerivedEncodings=true
