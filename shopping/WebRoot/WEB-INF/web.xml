@@ -122,7 +122,7 @@
 		<filter-name>shopFilter</filter-name>
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
-	<!--页面缓存配置
+	<!--页面缓存配置-->
 	<filter>
 		<filter-name>SimplePageFragmentCachingFilter</filter-name>
 		<filter-class>
@@ -141,7 +141,7 @@
 		<dispatcher>request</dispatcher>
 		<dispatcher>forward</dispatcher>
 		<dispatcher>include</dispatcher>
-	</filter-mapping>-->
+	</filter-mapping>
 	<!--系统主控servlet-->
 	<servlet>
 		<servlet-name>shopping</servlet-name>
