@@ -8,9 +8,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 聊天朋友
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,12 +24,12 @@ public class ChattingFriend extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -1686735184812269798L;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//朋友
+
+	// 朋友
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User friendUser;
 

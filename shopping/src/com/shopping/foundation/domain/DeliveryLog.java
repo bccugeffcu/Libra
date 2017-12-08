@@ -9,9 +9,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 收货日志
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,14 +24,14 @@ public class DeliveryLog extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 7705942616905919364L;
-	//开始时间
+	// 开始时间
 	private Date begin_time;
-	//结束时间
+	// 结束时间
 	private Date end_time;
-	//金币数量
+	// 金币数量
 	private int gold;
-	
-	//店铺
+
+	// 店铺
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Store store;
 

@@ -55,8 +55,10 @@ public class ImageCompress extends Frame {
 			new ImageCompress(fileName);
 		} else {
 			long c = System.currentTimeMillis();
-			ImageScale(fileName, fileName + "-s." + getFileExt(fileName).toLowerCase(), 160, 160);
-			System.out.println("elapse time:" + (float) (System.currentTimeMillis() - c) / 1000.0F + "s");
+			ImageScale(fileName, fileName + "-s."
+					+ getFileExt(fileName).toLowerCase(), 160, 160);
+			System.out.println("elapse time:"
+					+ (float) (System.currentTimeMillis() - c) / 1000.0F + "s");
 		}
 	}
 
@@ -122,7 +124,9 @@ public class ImageCompress extends Frame {
 			int imageWidth = image.getWidth(null);
 			int imageHeight = image.getHeight(null);
 
-			float scale = getRatio(imageWidth, imageHeight, Integer.parseInt(this.textWidth.getText()), Integer.parseInt(this.textWidth.getText()));
+			float scale = getRatio(imageWidth, imageHeight,
+					Integer.parseInt(this.textWidth.getText()),
+					Integer.parseInt(this.textWidth.getText()));
 			imageWidth = (int) (scale * imageWidth);
 			imageHeight = (int) (scale * imageHeight);
 
@@ -131,9 +135,11 @@ public class ImageCompress extends Frame {
 			this.mBufferedImage = new BufferedImage(imageWidth, imageHeight, 1);
 			Graphics2D g2 = this.mBufferedImage.createGraphics();
 
-			g2.drawImage(image, 0, 0, imageWidth, imageHeight, Color.white, null);
+			g2.drawImage(image, 0, 0, imageWidth, imageHeight, Color.white,
+					null);
 
-			float[] kernelData2 = { -0.125F, -0.125F, -0.125F, -0.125F, 2.0F, -0.125F, -0.125F, -0.125F, -0.125F };
+			float[] kernelData2 = { -0.125F, -0.125F, -0.125F, -0.125F, 2.0F,
+					-0.125F, -0.125F, -0.125F, -0.125F };
 			Kernel kernel = new Kernel(3, 3, kernelData2);
 			ConvolveOp cOp = new ConvolveOp(kernel, 1, null);
 			this.mBufferedImage = cOp.filter(this.mBufferedImage, null);
@@ -154,7 +160,8 @@ public class ImageCompress extends Frame {
 		if (mt.isErrorID(0)) {
 			return;
 		}
-		this.mBufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), 1);
+		this.mBufferedImage = new BufferedImage(image.getWidth(null),
+				image.getHeight(null), 1);
 		Graphics2D g2 = this.mBufferedImage.createGraphics();
 		g2.drawImage(image, null, null);
 		adjustToImageSize();
@@ -193,7 +200,8 @@ public class ImageCompress extends Frame {
 		g.drawImage(this.mBufferedImage, insets.left, insets.top, null);
 	}
 
-	public static void ImageScale(String sourceImg, String targetImg, int width, int height) {
+	public static void ImageScale(String sourceImg, String targetImg,
+			int width, int height) {
 		try {
 			Image image = ImageIO.read(new File(sourceImg));
 			int imageWidth = image.getWidth(null);
@@ -204,13 +212,16 @@ public class ImageCompress extends Frame {
 
 			image = image.getScaledInstance(imageWidth, imageHeight, 16);
 
-			BufferedImage mBufferedImage = new BufferedImage(imageWidth, imageHeight, 1);
+			BufferedImage mBufferedImage = new BufferedImage(imageWidth,
+					imageHeight, 1);
 			Graphics2D g2 = mBufferedImage.createGraphics();
 
-			g2.drawImage(image, 0, 0, imageWidth, imageHeight, Color.white, null);
+			g2.drawImage(image, 0, 0, imageWidth, imageHeight, Color.white,
+					null);
 			g2.dispose();
 
-			float[] kernelData2 = { -0.125F, -0.125F, -0.125F, -0.125F, 2.0F, -0.125F, -0.125F, -0.125F, -0.125F };
+			float[] kernelData2 = { -0.125F, -0.125F, -0.125F, -0.125F, 2.0F,
+					-0.125F, -0.125F, -0.125F, -0.125F };
 			Kernel kernel = new Kernel(3, 3, kernelData2);
 			ConvolveOp cOp = new ConvolveOp(kernel, 1, null);
 			mBufferedImage = cOp.filter(mBufferedImage, null);
@@ -224,7 +235,8 @@ public class ImageCompress extends Frame {
 		}
 	}
 
-	public static float getRatio(int width, int height, int maxWidth, int maxHeight) {
+	public static float getRatio(int width, int height, int maxWidth,
+			int maxHeight) {
 		float Ratio = 1.0F;
 
 		float widthRatio = (float) maxWidth / width;

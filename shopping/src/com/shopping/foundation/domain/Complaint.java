@@ -14,9 +14,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 投诉
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -28,76 +30,76 @@ public class Complaint extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 1022459514300854119L;
-	
-	//举报人
+
+	// 举报人
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User from_user;
-	
-	//被举报人
+
+	// 被举报人
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User to_user;
-	//举报类型
+	// 举报类型
 	private String type;
-	//举报状态
+	// 举报状态
 	private int status;
-	
-	//举报商品
+
+	// 举报商品
 	@OneToMany(mappedBy = "complaint", cascade = { javax.persistence.CascadeType.ALL })
 	private List<ComplaintGoods> cgs = new ArrayList<ComplaintGoods>();
-	
-	//举报主题
+
+	// 举报主题
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ComplaintSubject cs;
-	
-	//举报内容
+
+	// 举报内容
 	@Column(columnDefinition = "LongText")
 	private String from_user_content;
-	
-	//被举报内容
+
+	// 被举报内容
 	@Column(columnDefinition = "LongText")
 	private String to_user_content;
-	//举报日期
+	// 举报日期
 	private Date appeal_time;
-	
-	//处理内容
+
+	// 处理内容
 	@Column(columnDefinition = "LongText")
 	private String handle_content;
-	//处理时间
+	// 处理时间
 	private Date handle_time;
-	
-	//处理人
+
+	// 处理人
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User handle_user;
-	
-	//证据1
+
+	// 证据1
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory from_acc1;
-	
-	//证据2
+
+	// 证据2
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory from_acc2;
-	
-	//证据3
+
+	// 证据3
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory from_acc3;
-	
-	//举证1
+
+	// 举证1
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory to_acc1;
 
-	//举证2
+	// 举证2
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory to_acc2;
 
-	//举证3
+	// 举证3
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory to_acc3;
-	
-	//被举报订单
+
+	// 被举报订单
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OrderForm of;
-	
-	//聊天内容
+
+	// 聊天内容
 	@Column(columnDefinition = "LongText")
 	private String talk_content;
 

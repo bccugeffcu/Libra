@@ -26,24 +26,22 @@ public class GoodsCart extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//商品
+	// 商品
 	@OneToOne
 	private Goods goods;
-	//数量
+	// 数量
 	private int count;
-	
-	//价格
+
+	// 价格
 	@Column(precision = 12, scale = 2)
 	private BigDecimal price;
-	
-	//商品规格属性
+
+	// 商品规格属性
 	@ManyToMany
-	@JoinTable(name = "shopping_cart_gsp", joinColumns = {
-			@javax.persistence.JoinColumn(name = "cart_id") }, inverseJoinColumns = {
-					@javax.persistence.JoinColumn(name = "gsp_id") })
+	@JoinTable(name = "shopping_cart_gsp", joinColumns = { @javax.persistence.JoinColumn(name = "cart_id") }, inverseJoinColumns = { @javax.persistence.JoinColumn(name = "gsp_id") })
 	private List<GoodsSpecProperty> gsps = new ArrayList<GoodsSpecProperty>();
-	
-    //商品规格
+
+	// 商品规格
 	@Lob
 	@Column(columnDefinition = "LongText")
 	private String spec_info;
@@ -51,9 +49,9 @@ public class GoodsCart extends IdEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OrderForm of;
 	private String cart_type;
-	
-	//商店运输
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	// 商店运输
+	@ManyToOne(fetch = FetchType.LAZY)
 	private StoreCart sc;
 
 	public StoreCart getSc() {

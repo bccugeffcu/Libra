@@ -13,9 +13,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.annotation.Lock;
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 广告
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -26,43 +28,43 @@ public class Advert extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -4650388260362359406L;
-	
-	//广告标题
+
+	// 广告标题
 	private String ad_title;
-	
-	//广告开始时间
+
+	// 广告开始时间
 	@Lock
 	@Temporal(TemporalType.DATE)
 	private Date ad_begin_time;
 
-	//广告结束时间
+	// 广告结束时间
 	@Lock
 	@Temporal(TemporalType.DATE)
 	private Date ad_end_time;
-	
-	//广告位置
+
+	// 广告位置
 	@ManyToOne(fetch = FetchType.LAZY)
 	private AdvertPosition ad_ap;
-	
-	//广告状态
+
+	// 广告状态
 	@Lock
 	private int ad_status;
-	//广告附件
+	// 广告附件
 	@OneToOne(cascade = { javax.persistence.CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private Accessory ad_acc;
-	//广告内容
+	// 广告内容
 	private String ad_text;
-	//广告序列
+	// 广告序列
 	private int ad_slide_sequence;
-	
-	//广告所属人
+
+	// 广告所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User ad_user;
-	//广告链接
+	// 广告链接
 	private String ad_url;
-	//广告点击量
+	// 广告点击量
 	private int ad_click_num;
-	//广告金币
+	// 广告金币
 	private int ad_gold;
 
 	public int getAd_gold() {

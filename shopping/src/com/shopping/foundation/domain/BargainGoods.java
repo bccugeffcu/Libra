@@ -13,9 +13,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 特价商品
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -27,31 +29,31 @@ public class BargainGoods extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 7152250727882399474L;
-	//商品
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods bg_goods;
-	//状态
+	// 状态
 	private int bg_status;
-	
-	//折扣
+
+	// 折扣
 	@Column(precision = 3, scale = 1)
 	private BigDecimal bg_rebate;
-	
-	//数量
+
+	// 数量
 	@Column(columnDefinition = "int default 1")
 	private int bg_count;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User bg_admin_user;
-	
-	//特价价格
+
+	// 特价价格
 	@Column(precision = 12, scale = 2)
 	private BigDecimal bg_price;
-	
-	//特价时间
+
+	// 特价时间
 	@Temporal(TemporalType.DATE)
 	private Date bg_time;
-	//开始时间
+	// 开始时间
 	private Date audit_time;
 
 	public Date getAudit_time() {

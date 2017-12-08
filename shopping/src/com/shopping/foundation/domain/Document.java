@@ -8,9 +8,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 文档
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -21,12 +23,12 @@ public class Document extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -7164129688953881000L;
-	//标识
+	// 标识
 	private String mark;
-	//标题
+	// 标题
 	private String title;
-	
-	//内容
+
+	// 内容
 	@Lob
 	@Column(columnDefinition = "LongText")
 	private String content;

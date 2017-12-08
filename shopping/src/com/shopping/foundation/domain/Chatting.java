@@ -12,8 +12,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 聊天
+ * 
  * @author Administrator
  *
  */
@@ -26,20 +28,20 @@ public class Chatting extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -831388667691865610L;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user1;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user2;
-	
-	//类型
+
+	// 类型
 	@Column(columnDefinition = "int default 0")
 	private int type;
-	
-	//日志
+
+	// 日志
 	@OneToMany(mappedBy = "chatting", cascade = { javax.persistence.CascadeType.REMOVE })
 	private List<ChattingLog> logs = new ArrayList<ChattingLog>();
 

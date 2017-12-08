@@ -18,12 +18,12 @@ public class GoodsBrandCategory extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//名称
+	// 名称
 	private String name;
-	//序列
+	// 序列
 	private int sequence;
-	
-	//商品品牌
+
+	// 商品品牌
 	@OneToMany(mappedBy = "category")
 	private List<GoodsBrand> brands = new ArrayList<GoodsBrand>();
 

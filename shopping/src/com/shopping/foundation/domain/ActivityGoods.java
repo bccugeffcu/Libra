@@ -22,17 +22,17 @@ public class ActivityGoods extends IdEntity {
 	private static final long serialVersionUID = 2929806712926931433L;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods ag_goods;
-	//活动状态
+	// 活动状态
 	private int ag_status;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User ag_admin;
-	
-	//活动
+
+	// 活动
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Activity act;
-	
-	//活动价格
+
+	// 活动价格
 	@Column(precision = 12, scale = 2)
 	private BigDecimal ag_price;
 

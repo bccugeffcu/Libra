@@ -7,24 +7,19 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public abstract interface IRefundLogService
-{
-  public abstract boolean save(RefundLog paramRefundLog);
+public abstract interface IRefundLogService {
+	public abstract boolean save(RefundLog paramRefundLog);
 
-  public abstract RefundLog getObjById(Long paramLong);
+	public abstract RefundLog getObjById(Long paramLong);
 
-  public abstract boolean delete(Long paramLong);
+	public abstract boolean delete(Long paramLong);
 
-  public abstract boolean batchDelete(List<Serializable> paramList);
+	public abstract boolean batchDelete(List<Serializable> paramList);
 
-  public abstract IPageList list(IQueryObject paramIQueryObject);
+	public abstract IPageList list(IQueryObject paramIQueryObject);
 
-  public abstract boolean update(RefundLog paramRefundLog);
+	public abstract boolean update(RefundLog paramRefundLog);
 
-  public abstract List<RefundLog> query(String paramString, Map paramMap, int paramInt1, int paramInt2);
+	public abstract List<RefundLog> query(String paramString, Map paramMap,
+			int paramInt1, int paramInt2);
 }
-
-
-
- 
- 

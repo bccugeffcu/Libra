@@ -8,8 +8,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 地址
+ * 
  * @author shopping
  *
  */
@@ -23,17 +25,17 @@ public class Address extends IdEntity {
 	private static final long serialVersionUID = -754369306890462179L;
 
 	private String trueName;
-	
-	//地区
+
+	// 地区
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Area area;
-	//地址信息
+	// 地址信息
 	private String area_info;
-	//邮编
+	// 邮编
 	private String zip;
-	//电话
+	// 电话
 	private String telephone;
-	//手机
+	// 手机
 	private String mobile;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -13,49 +13,51 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 附件
- * @author 
+ * 
+ * @author
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "shopping_accessory")
 public class Accessory extends IdEntity {
-	//附近名称
+	// 附近名称
 	private String name;
-	//附件路径
+	// 附件路径
 	private String path;
-	//大小
+	// 大小
 	private float size;
-	//宽度
+	// 宽度
 	private int width;
-	//高度
+	// 高度
 	private int height;
-	//扩展名
+	// 扩展名
 	private String ext;
-	//名称详情
+	// 名称详情
 	private String info;
-	
-	//所属人
+
+	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//相册
+
+	// 相册
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Album album;
-	
+
 	@OneToOne(mappedBy = "album_cover", fetch = FetchType.LAZY)
 	private Album cover_album;
-	
-	//系统配置
+
+	// 系统配置
 	@ManyToOne(fetch = FetchType.LAZY)
 	private SysConfig config;
 
-	//goods主列表
+	// goods主列表
 	@OneToMany(mappedBy = "goods_main_photo")
 	private List<Goods> goods_main_list = new ArrayList<Goods>();
 
-	//goods列表
+	// goods列表
 	@ManyToMany(mappedBy = "goods_photos")
 	private List<Goods> goods_list = new ArrayList<Goods>();
 

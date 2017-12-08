@@ -12,9 +12,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 确认收货
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -26,30 +28,30 @@ public class DeliveryGoods extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -6716674058148213758L;
-	
-	//商品
+
+	// 商品
 	@OneToOne(fetch = FetchType.LAZY)
 	private Goods d_goods;
-	
-	//商品
+
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods d_delivery_goods;
-	//状态
+	// 状态
 	private int d_status;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User d_admin_user;
-	//接受时间
+	// 接受时间
 	private Date d_audit_time;
-	//拒绝时间
+	// 拒绝时间
 	private Date d_refuse_time;
-	
-	//开始时间
+
+	// 开始时间
 	@Temporal(TemporalType.DATE)
 	private Date d_begin_time;
-	
-	//结束时间
+
+	// 结束时间
 	@Temporal(TemporalType.DATE)
 	private Date d_end_time;
 

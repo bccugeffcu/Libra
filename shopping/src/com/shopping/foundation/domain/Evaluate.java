@@ -12,9 +12,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 评价
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -26,59 +28,59 @@ public class Evaluate extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 1519733188476053781L;
-	
-	//评价商品
+
+	// 评价商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods evaluate_goods;
-	
-	//商品序列
+
+	// 商品序列
 	@Lob
 	@Column(columnDefinition = "LongText")
 	private String goods_spec;
-	
-	//订单
+
+	// 订单
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OrderForm of;
-	//评价类型
+	// 评价类型
 	private String evaluate_type;
-	//买家
+	// 买家
 	private int evaluate_buyer_val;
-	
-	//评价描述
+
+	// 评价描述
 	@Column(precision = 12, scale = 2)
 	private BigDecimal description_evaluate;
-	
-	//评价服务
+
+	// 评价服务
 	@Column(precision = 12, scale = 2)
 	private BigDecimal service_evaluate;
-	
-	//评价物流
+
+	// 评价物流
 	@Column(precision = 12, scale = 2)
 	private BigDecimal ship_evaluate;
-	//卖家评价
+	// 卖家评价
 	private int evaluate_seller_val;
-	
-	//评价信息
+
+	// 评价信息
 	@Column(columnDefinition = "LongText")
 	private String evaluate_info;
-	
-	//评价用户
+
+	// 评价用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User evaluate_user;
-	
-	//卖家评价
+
+	// 卖家评价
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User evaluate_seller_user;
-	//评价时间
+	// 评价时间
 	private Date evaluate_seller_time;
-	
-	//卖家学习
+
+	// 卖家学习
 	@Column(columnDefinition = "LongText")
 	private String evaluate_seller_info;
-	//评价状态
+	// 评价状态
 	private int evaluate_status;
-	
-	//评价
+
+	// 评价
 	@Column(columnDefinition = "LongText")
 	private String evaluate_admin_info;
 

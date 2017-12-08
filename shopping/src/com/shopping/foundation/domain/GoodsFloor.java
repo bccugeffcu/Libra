@@ -22,12 +22,12 @@ public class GoodsFloor extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//名称
+	// 名称
 	private String gf_name;
 	private String gf_css;
-	//序列
+	// 序列
 	private int gf_sequence;
-	//货物数量
+	// 货物数量
 	private int gf_goods_count;
 
 	@OneToMany(mappedBy = "parent", cascade = { javax.persistence.CascadeType.REMOVE })
@@ -36,11 +36,11 @@ public class GoodsFloor extends IdEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private GoodsFloor parent;
-	//水平
+	// 水平
 	private int gf_level;
-	//是否展示
+	// 是否展示
 	private boolean gf_display;
-	
+
 	@Column(columnDefinition = "LongText")
 	private String gf_gc_list;
 

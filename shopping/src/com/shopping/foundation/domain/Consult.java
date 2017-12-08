@@ -10,9 +10,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 产品咨询
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -24,31 +26,31 @@ public class Consult extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -9210332009604139327L;
-	
-	//商品
+
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods goods;
-	
-	//咨询内容
+
+	// 咨询内容
 	@Column(columnDefinition = "LongText")
 	private String consult_content;
-	//是否回复
+	// 是否回复
 	private boolean reply;
-	
-	//咨询回复
+
+	// 咨询回复
 	@Column(columnDefinition = "LongText")
 	private String consult_reply;
-	
-	//咨询用户
+
+	// 咨询用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User consult_user;
-	
-	//回复用户
+
+	// 回复用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User reply_user;
-	//回复时间
+	// 回复时间
 	private Date reply_time;
-	//咨询邮件
+	// 咨询邮件
 	private String consult_email;
 
 	public boolean isReply() {

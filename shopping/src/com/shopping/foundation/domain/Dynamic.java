@@ -13,9 +13,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 动态
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -27,56 +29,56 @@ public class Dynamic extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 6799666483543200124L;
-	
-	//商品
+
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods goods;
-	
-	//店铺
+
+	// 店铺
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Store store;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//被锁住
+
+	// 被锁住
 	@Column(columnDefinition = "bit default false")
 	private boolean locked;
-	
-	//图片
+
+	// 图片
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory img;
-	
-	//内容
+
+	// 内容
 	@Column(columnDefinition = "LongText")
 	private String content;
-	
-	//反对量
+
+	// 反对量
 	@Column(columnDefinition = "int default 0")
 	private int turnNum;
-	
-	//讨论数量
+
+	// 讨论数量
 	@Column(columnDefinition = "int default 0")
 	private int discussNum;
-	
-	//点赞数量
+
+	// 点赞数量
 	@Column(columnDefinition = "int default 0")
 	private int praiseNum;
-	
-	//讨论父类
+
+	// 讨论父类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Dynamic dissParent;
-	
-	//返回父类
+
+	// 返回父类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Dynamic turnParent;
-	
-	//动态子类
+
+	// 动态子类
 	@OneToMany(mappedBy = "dissParent", cascade = { javax.persistence.CascadeType.REMOVE })
 	List<Dynamic> childs = new ArrayList<Dynamic>();
-	
-	//是否显示
+
+	// 是否显示
 	@Column(columnDefinition = "bit default true")
 	private boolean display;
 

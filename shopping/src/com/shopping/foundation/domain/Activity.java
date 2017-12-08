@@ -16,8 +16,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 活动
+ * 
  * @author shopping
  *
  */
@@ -29,33 +31,33 @@ public class Activity extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 9102443646190265675L;
-	
-	//活动标题
+
+	// 活动标题
 	private String ac_title;
-	
-	//活动开始时间
+
+	// 活动开始时间
 	@Temporal(TemporalType.DATE)
 	private Date ac_begin_time;
-	
-	//活动结束时间
+
+	// 活动结束时间
 	@Temporal(TemporalType.DATE)
 	private Date ac_end_time;
-	
-	//活动附件
+
+	// 活动附件
 	@OneToOne(cascade = { javax.persistence.CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private Accessory ac_acc;
-	//活动序列号
+	// 活动序列号
 	private int ac_sequence;
-	//活动状态
+	// 活动状态
 	private int ac_status;
-	//活动内容
+	// 活动内容
 	@Column(columnDefinition = "LongText")
 	private String ac_content;
 
 	@OneToMany(mappedBy = "act", cascade = { javax.persistence.CascadeType.REMOVE })
 	private List<ActivityGoods> ags = new ArrayList<ActivityGoods>();
-	
-	//活动折扣
+
+	// 活动折扣
 	@Column(precision = 3, scale = 2)
 	private BigDecimal ac_rebate;
 

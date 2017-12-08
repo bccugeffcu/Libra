@@ -9,9 +9,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 举报商品
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -23,16 +25,16 @@ public class ComplaintGoods extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 688451202252628683L;
-	
-	//商品
+
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods goods;
-	
-	//内容
+
+	// 内容
 	@Column(columnDefinition = "LongText")
 	private String content;
-	
-	//举报
+
+	// 举报
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Complaint complaint;
 

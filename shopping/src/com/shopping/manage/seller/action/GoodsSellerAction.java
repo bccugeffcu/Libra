@@ -286,11 +286,16 @@ public class GoodsSellerAction {
 
 	@SecurityMapping(display = false, rsequence = 0, title = "发布商品第二步", value = "/seller/add_goods_second.htm*", rtype = "seller", rname = "商品发布", rcode = "goods_seller", rgroup = "商品管理")
 	@RequestMapping({ "/seller/add_goods_second.htm" })
-	public ModelAndView add_goods_second(HttpServletRequest request, HttpServletResponse response) {
-		
-		ModelAndView mv = new JModelAndView("error.html", this.configService.getSysConfig(), this.userConfigService.getUserConfig(), 1, request, response);
-		User user = this.userService.getObjById(SecurityUserHolder.getCurrentUser().getId());
-		int store_status = this.storeService.getObjByProperty("user.id", user.getId()).getStore_status();
+	public ModelAndView add_goods_second(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView mv = new JModelAndView("error.html",
+				this.configService.getSysConfig(),
+				this.userConfigService.getUserConfig(), 1, request, response);
+		User user = this.userService.getObjById(SecurityUserHolder
+				.getCurrentUser().getId());
+		int store_status = this.storeService.getObjByProperty("user.id",
+				user.getId()).getStore_status();
 		if (store_status == 2) {
 			mv = new JModelAndView(
 					"user/default/usercenter/add_goods_second.html",
@@ -456,13 +461,16 @@ public class GoodsSellerAction {
 	@RequestMapping({ "/seller/swf_upload.htm" })
 	public void swf_upload(HttpServletRequest request,
 			HttpServletResponse response, String user_id, String album_id) {
-		
+
 		User user = this.userService.getObjById(CommUtil.null2Long(user_id));
-		String path = this.storeTools.createUserFolder(request, this.configService.getSysConfig(), user.getStore());
-		String url = this.storeTools.createUserFolderURL(this.configService.getSysConfig(), user.getStore());
-		
+		String path = this.storeTools.createUserFolder(request,
+				this.configService.getSysConfig(), user.getStore());
+		String url = this.storeTools.createUserFolderURL(
+				this.configService.getSysConfig(), user.getStore());
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest.getFile("imgFile");
+		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest
+				.getFile("imgFile");
 		double fileSize = Double.valueOf(file.getSize()).doubleValue();
 		fileSize /= 1048576.0D;
 		double csize = CommUtil.fileSize(new File(path));
@@ -475,30 +483,41 @@ public class GoodsSellerAction {
 		Map json_map = new HashMap();
 		if (remainSpace > fileSize) {
 			try {
-				Map map = CommUtil.saveFileToServer(request, "imgFile", path, null, null);
+				Map map = CommUtil.saveFileToServer(request, "imgFile", path,
+						null, null);
 				Map params = new HashMap();
 				params.put("store_id", user.getStore().getId());
 				List wms = this.waterMarkService
-						.query("select obj from WaterMark obj where obj.store.id=:store_id", params, -1, -1);
+						.query("select obj from WaterMark obj where obj.store.id=:store_id",
+								params, -1, -1);
 				if (wms.size() > 0) {
 					WaterMark mark = (WaterMark) wms.get(0);
 					if (mark.isWm_image_open()) {
-						String pressImg = request.getSession().getServletContext().getRealPath("")
-								+ File.separator + mark.getWm_image().getPath()
+						String pressImg = request.getSession()
+								.getServletContext().getRealPath("")
+								+ File.separator
+								+ mark.getWm_image().getPath()
 								+ File.separator + mark.getWm_image().getName();
-						String targetImg = path + File.separator + map.get("fileName");
+						String targetImg = path + File.separator
+								+ map.get("fileName");
 						int pos = mark.getWm_image_pos();
 						float alpha = mark.getWm_image_alpha();
-						CommUtil.waterMarkWithImage(pressImg, targetImg, pos, alpha);
+						CommUtil.waterMarkWithImage(pressImg, targetImg, pos,
+								alpha);
 					}
 					if (mark.isWm_text_open()) {
-						String targetImg = path + File.separator + map.get("fileName");
+						String targetImg = path + File.separator
+								+ map.get("fileName");
 						int pos = mark.getWm_text_pos();
 						String text = mark.getWm_text();
 						String markContentColor = mark.getWm_text_color();
 						CommUtil.waterMarkWithText(
-								targetImg, targetImg, text, markContentColor,
-								new Font(mark.getWm_text_font(), 1, mark.getWm_text_font_size()), pos, 100.0F);
+								targetImg,
+								targetImg,
+								text,
+								markContentColor,
+								new Font(mark.getWm_text_font(), 1, mark
+										.getWm_text_font_size()), pos, 100.0F);
 					}
 				}
 				Accessory image = new Accessory();
@@ -511,9 +530,11 @@ public class GoodsSellerAction {
 				image.setUser(user);
 				Album album = null;
 				if ((album_id != null) && (!album_id.equals(""))) {
-					album = this.albumService.getObjById(CommUtil.null2Long(album_id));
+					album = this.albumService.getObjById(CommUtil
+							.null2Long(album_id));
 				} else {
-					album = this.albumService.getDefaultAlbum(CommUtil.null2Long(user_id));
+					album = this.albumService.getDefaultAlbum(CommUtil
+							.null2Long(user_id));
 					if (album == null) {
 						album = new Album();
 						album.setAddTime(new Date());
@@ -525,19 +546,24 @@ public class GoodsSellerAction {
 				}
 				image.setAlbum(album);
 				this.accessoryService.save(image);
-				json_map.put("url", CommUtil.getURL(request) + "/" + url + "/" + image.getName());
+				json_map.put("url", CommUtil.getURL(request) + "/" + url + "/"
+						+ image.getName());
 				json_map.put("id", image.getId());
-				json_map.put("remainSpace", Double.valueOf(remainSpace == 10000.0D ? 0.0D : remainSpace));
+				json_map.put("remainSpace", Double
+						.valueOf(remainSpace == 10000.0D ? 0.0D : remainSpace));
 
-				String ext = image.getExt().indexOf(".") < 0 ? "." + image.getExt() : image.getExt();
-				String source = request.getSession().getServletContext().getRealPath("/")
+				String ext = image.getExt().indexOf(".") < 0 ? "."
+						+ image.getExt() : image.getExt();
+				String source = request.getSession().getServletContext()
+						.getRealPath("/")
 						+ image.getPath() + File.separator + image.getName();
 				String target = source + "_small" + ext;
 				CommUtil.createSmall(source, target, this.configService
 						.getSysConfig().getSmallWidth(), this.configService
 						.getSysConfig().getSmallHeight());
 
-				String midext = image.getExt().indexOf(".") < 0 ? "." + image.getExt() : image.getExt();
+				String midext = image.getExt().indexOf(".") < 0 ? "."
+						+ image.getExt() : image.getExt();
 				String midtarget = source + "_middle" + ext;
 				CommUtil.createSmall(source, midtarget, this.configService
 						.getSysConfig().getMiddleWidth(), this.configService
@@ -561,59 +587,74 @@ public class GoodsSellerAction {
 			e.printStackTrace();
 		}
 	}
-	
-	@RequestMapping({"/seller/upload.htm"})
-    public void upload(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-		
-		/*String saveFilePathName = request.getSession().getServletContext().getRealPath("/") + 
-				this.configService.getSysConfig().getUploadFilePath() + File.separator + "common";*/
+
+	@RequestMapping({ "/seller/upload.htm" })
+	public void upload(HttpServletRequest request, HttpServletResponse response)
+			throws ClassNotFoundException {
+
+		/*
+		 * String saveFilePathName =
+		 * request.getSession().getServletContext().getRealPath("/") +
+		 * this.configService.getSysConfig().getUploadFilePath() +
+		 * File.separator + "common";
+		 */
 		Store store = SecurityUserHolder.getCurrentUser().getStore();
-		
-		String saveFilePathName = this.storeTools.createUserFolder(request, this.configService.getSysConfig(), store);
-		
-		String url = this.storeTools.createUserFolderURL(this.configService.getSysConfig(), store);
-		
-		String webPath = request.getContextPath().equals("/") ? "" : request.getContextPath();
-     
-	    if ((this.configService.getSysConfig().getAddress() != null) && 
-	       (!this.configService.getSysConfig().getAddress().equals(""))) {
-	       webPath = this.configService.getSysConfig().getAddress() + webPath;
-	    }
-	    JSONObject obj = new JSONObject();
-	    try {
-	       Map map = CommUtil.saveFileToServer(request, "imgFile", saveFilePathName, null, null);
-	       //String url = webPath + "/" + this.configService.getSysConfig().getUploadFilePath() + "/common/" + map.get("fileName");
-	       url = CommUtil.getURL(request) + "/" + url + "/" + map.get("fileName");
-	       obj.put("error", Integer.valueOf(0));
-	       obj.put("url", url);
-	    } catch (IOException e) {
-	       obj.put("error", Integer.valueOf(1));
-	       obj.put("message", e.getMessage());
-	       e.printStackTrace();
-	    }
-	    response.setContentType("text/html");
-	    response.setHeader("Cache-Control", "no-cache");
-	    response.setCharacterEncoding("UTF-8");
-	    try {
-	       PrintWriter writer = response.getWriter();
-	       writer.print(obj.toJSONString());
-	    } catch (IOException e) {
-	       e.printStackTrace();
-	    }
-   }
+
+		String saveFilePathName = this.storeTools.createUserFolder(request,
+				this.configService.getSysConfig(), store);
+
+		String url = this.storeTools.createUserFolderURL(
+				this.configService.getSysConfig(), store);
+
+		String webPath = request.getContextPath().equals("/") ? "" : request
+				.getContextPath();
+
+		if ((this.configService.getSysConfig().getAddress() != null)
+				&& (!this.configService.getSysConfig().getAddress().equals(""))) {
+			webPath = this.configService.getSysConfig().getAddress() + webPath;
+		}
+		JSONObject obj = new JSONObject();
+		try {
+			Map map = CommUtil.saveFileToServer(request, "imgFile",
+					saveFilePathName, null, null);
+			// String url = webPath + "/" +
+			// this.configService.getSysConfig().getUploadFilePath() +
+			// "/common/" + map.get("fileName");
+			url = CommUtil.getURL(request) + "/" + url + "/"
+					+ map.get("fileName");
+			obj.put("error", Integer.valueOf(0));
+			obj.put("url", url);
+		} catch (IOException e) {
+			obj.put("error", Integer.valueOf(1));
+			obj.put("message", e.getMessage());
+			e.printStackTrace();
+		}
+		response.setContentType("text/html");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setCharacterEncoding("UTF-8");
+		try {
+			PrintWriter writer = response.getWriter();
+			writer.print(obj.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@SecurityMapping(display = false, rsequence = 0, title = "商品图片删除", value = "/seller/goods_image_del.htm*", rtype = "seller", rname = "商品发布", rcode = "goods_seller", rgroup = "商品管理")
 	@RequestMapping({ "/seller/goods_image_del.htm" })
 	public void goods_image_del(HttpServletRequest request,
 			HttpServletResponse response, String image_id) {
-		User user = this.userService.getObjById(SecurityUserHolder.getCurrentUser().getId());
-		String path = this.storeTools.createUserFolder(request, this.configService.getSysConfig(), user.getStore());
+		User user = this.userService.getObjById(SecurityUserHolder
+				.getCurrentUser().getId());
+		String path = this.storeTools.createUserFolder(request,
+				this.configService.getSysConfig(), user.getStore());
 		response.setContentType("text/plain");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setCharacterEncoding("UTF-8");
 		try {
 			Map map = new HashMap();
-			Accessory img = this.accessoryService.getObjById(CommUtil.null2Long(image_id));
+			Accessory img = this.accessoryService.getObjById(CommUtil
+					.null2Long(image_id));
 			for (Goods goods : img.getGoods_main_list()) {
 				goods.setGoods_main_photo(null);
 				this.goodsService.update(goods);
@@ -629,7 +670,9 @@ public class GoodsSellerAction {
 			double csize = CommUtil.fileSize(new File(path));
 			double remainSpace = 10000.0D;
 			if (user.getStore().getGrade().getSpaceSize() != 0.0F) {
-				remainSpace = CommUtil.div(Double.valueOf(user.getStore().getGrade().getSpaceSize()
+				remainSpace = CommUtil.div(
+						Double.valueOf(user.getStore().getGrade()
+								.getSpaceSize()
 								* 1024.0F - csize), Integer.valueOf(1024));
 			}
 			map.put("result", Boolean.valueOf(ret));
@@ -681,31 +724,42 @@ public class GoodsSellerAction {
 			String goods_properties, String intentory_details,
 			String goods_session, String transport_type, String transport_id) {
 		ModelAndView mv = null;
-		String goods_session1 = CommUtil.null2String(request.getSession(false).getAttribute("goods_session"));
+		String goods_session1 = CommUtil.null2String(request.getSession(false)
+				.getAttribute("goods_session"));
 		if (goods_session1.equals("")) {
-			mv = new JModelAndView("error.html", this.configService.getSysConfig(),
-					this.userConfigService.getUserConfig(), 1, request, response);
+			mv = new JModelAndView("error.html",
+					this.configService.getSysConfig(),
+					this.userConfigService.getUserConfig(), 1, request,
+					response);
 			mv.addObject("op_title", "禁止重复提交表单");
 			mv.addObject("url", CommUtil.getURL(request) + "/seller/index.htm");
 		} else if (goods_session1.equals(goods_session)) {
 			if ((id == null) || (id.equals(""))) {
-				mv = new JModelAndView("user/default/usercenter/add_goods_finish.html", this.configService.getSysConfig(),
-						this.userConfigService.getUserConfig(), 0, request, response);
+				mv = new JModelAndView(
+						"user/default/usercenter/add_goods_finish.html",
+						this.configService.getSysConfig(),
+						this.userConfigService.getUserConfig(), 0, request,
+						response);
 			} else {
-				mv = new JModelAndView("success.html", this.configService.getSysConfig(),
-						this.userConfigService.getUserConfig(), 1, request, response);
+				mv = new JModelAndView("success.html",
+						this.configService.getSysConfig(),
+						this.userConfigService.getUserConfig(), 1, request,
+						response);
 				mv.addObject("op_title", "商品编辑成功");
-				mv.addObject("url", CommUtil.getURL(request) + "/goods_" + id + ".htm");
+				mv.addObject("url", CommUtil.getURL(request) + "/goods_" + id
+						+ ".htm");
 			}
 			WebForm wf = new WebForm();
 			Goods goods = null;
 			if (id.equals("")) {
 				goods = (Goods) wf.toPo(request, Goods.class);
 				goods.setAddTime(new Date());
-				User user = this.userService.getObjById(SecurityUserHolder.getCurrentUser().getId());
+				User user = this.userService.getObjById(SecurityUserHolder
+						.getCurrentUser().getId());
 				goods.setGoods_store(user.getStore());
 			} else {
-				Goods obj = this.goodsService.getObjById(Long.valueOf(Long.parseLong(id)));
+				Goods obj = this.goodsService.getObjById(Long.valueOf(Long
+						.parseLong(id)));
 				goods = (Goods) wf.toPo(request, obj);
 			}
 			if ((goods.getCombin_status() != 2)
@@ -715,11 +769,13 @@ public class GoodsSellerAction {
 				goods.setGoods_current_price(goods.getStore_price());
 			}
 			goods.setGoods_name(clearContent(goods.getGoods_name()));
-			GoodsClass gc = this.goodsClassService.getObjById(Long.valueOf(Long.parseLong(goods_class_id)));
+			GoodsClass gc = this.goodsClassService.getObjById(Long.valueOf(Long
+					.parseLong(goods_class_id)));
 			goods.setGc(gc);
 			Accessory main_img = null;
 			if ((goods_main_img_id != null) && (!goods_main_img_id.equals(""))) {
-				main_img = this.accessoryService.getObjById(Long.valueOf(Long.parseLong(goods_main_img_id)));
+				main_img = this.accessoryService.getObjById(Long.valueOf(Long
+						.parseLong(goods_main_img_id)));
 			}
 			goods.setGoods_main_photo(main_img);
 			goods.getGoods_ugcs().clear();
@@ -741,12 +797,14 @@ public class GoodsSellerAction {
 			for (int i = 0; i < img_ids.length; i++) {
 				String img_id = img_ids[i];
 				if (!img_id.equals("")) {
-					Accessory img = this.accessoryService.getObjById(Long.valueOf(Long.parseLong(img_id)));
+					Accessory img = this.accessoryService.getObjById(Long
+							.valueOf(Long.parseLong(img_id)));
 					goods.getGoods_photos().add(img);
 				}
 			}
 			if ((goods_brand_id != null) && (!goods_brand_id.equals(""))) {
-				GoodsBrand goods_brand = this.goodsBrandService.getObjById(Long.valueOf(Long.parseLong(goods_brand_id)));
+				GoodsBrand goods_brand = this.goodsBrandService.getObjById(Long
+						.valueOf(Long.parseLong(goods_brand_id)));
 				goods.setGoods_brand(goods_brand);
 			}
 			goods.getGoods_specs().clear();
@@ -755,7 +813,8 @@ public class GoodsSellerAction {
 			for (int i = 0; i < spec_ids.length; i++) {
 				String spec_id = spec_ids[i];
 				if (!spec_id.equals("")) {
-					GoodsSpecProperty gsp = this.specPropertyService.getObjById(Long.valueOf(Long.parseLong(spec_id)));
+					GoodsSpecProperty gsp = this.specPropertyService
+							.getObjById(Long.valueOf(Long.parseLong(spec_id)));
 					goods.getGoods_specs().add(gsp);
 				}
 			}
@@ -771,7 +830,10 @@ public class GoodsSellerAction {
 					Map map = new HashMap();
 					map.put("id", list[0]);
 					map.put("val", list[1]);
-					map.put("name", this.goodsTypePropertyService.getObjById(Long.valueOf(Long.parseLong(list[0]))).getName());
+					map.put("name",
+							this.goodsTypePropertyService.getObjById(
+									Long.valueOf(Long.parseLong(list[0])))
+									.getName());
 					((List) maps).add(map);
 				}
 			}
@@ -791,9 +853,11 @@ public class GoodsSellerAction {
 					((List) maps).add(map);
 				}
 			}
-			goods.setGoods_inventory_detail(Json.toJson(maps, JsonFormat.compact()));
+			goods.setGoods_inventory_detail(Json.toJson(maps,
+					JsonFormat.compact()));
 			if (CommUtil.null2Int(transport_type) == 0) {
-				Transport trans = this.transportService.getObjById(CommUtil.null2Long(transport_id));
+				Transport trans = this.transportService.getObjById(CommUtil
+						.null2Long(transport_id));
 				goods.setTransport(trans);
 			}
 			if (CommUtil.null2Int(transport_type) == 1) {
@@ -802,7 +866,8 @@ public class GoodsSellerAction {
 			if (id.equals("")) {
 				this.goodsService.save(goods);
 
-				String goods_lucene_path = System.getProperty("user.dir") + File.separator + "luence" + File.separator + "goods";
+				String goods_lucene_path = System.getProperty("user.dir")
+						+ File.separator + "luence" + File.separator + "goods";
 				File file = new File(goods_lucene_path);
 				if (!file.exists()) {
 					CommUtil.createFolder(goods_lucene_path);
@@ -812,7 +877,8 @@ public class GoodsSellerAction {
 				vo.setVo_title(goods.getGoods_name());
 				vo.setVo_content(goods.getGoods_details());
 				vo.setVo_type("goods");
-				vo.setVo_store_price(CommUtil.null2Double(goods.getStore_price()));
+				vo.setVo_store_price(CommUtil.null2Double(goods
+						.getStore_price()));
 				vo.setVo_add_time(goods.getAddTime().getTime());
 				vo.setVo_goods_salenum(goods.getGoods_salenum());
 				LuceneUtil lucene = LuceneUtil.instance();
@@ -832,7 +898,8 @@ public class GoodsSellerAction {
 				vo.setVo_title(goods.getGoods_name());
 				vo.setVo_content(goods.getGoods_details());
 				vo.setVo_type("goods");
-				vo.setVo_store_price(CommUtil.null2Double(goods.getStore_price()));
+				vo.setVo_store_price(CommUtil.null2Double(goods
+						.getStore_price()));
 				vo.setVo_add_time(goods.getAddTime().getTime());
 				vo.setVo_goods_salenum(goods.getGoods_salenum());
 				LuceneUtil lucene = LuceneUtil.instance();
@@ -842,8 +909,10 @@ public class GoodsSellerAction {
 			mv.addObject("obj", goods);
 			request.getSession(false).removeAttribute("goods_session");
 		} else {
-			mv = new JModelAndView("error.html", this.configService.getSysConfig(),
-					this.userConfigService.getUserConfig(), 1, request, response);
+			mv = new JModelAndView("error.html",
+					this.configService.getSysConfig(),
+					this.userConfigService.getUserConfig(), 1, request,
+					response);
 			mv.addObject("op_title", "参数错误");
 			mv.addObject("url", CommUtil.getURL(request) + "/seller/index.htm");
 		}
@@ -855,7 +924,8 @@ public class GoodsSellerAction {
 	@RequestMapping({ "/seller/load_goods_class.htm" })
 	public void load_goods_class(HttpServletRequest request,
 			HttpServletResponse response, String pid, String session) {
-		GoodsClass obj = this.goodsClassService.getObjById(CommUtil.null2Long(pid));
+		GoodsClass obj = this.goodsClassService.getObjById(CommUtil
+				.null2Long(pid));
 		List list = new ArrayList();
 		if (obj != null) {
 			for (GoodsClass gc : obj.getChilds()) {
@@ -945,7 +1015,8 @@ public class GoodsSellerAction {
 			HttpServletResponse response, String id, String name) {
 		GoodsClass obj = null;
 		if ((id != null) && (!id.equals("")))
-			obj = this.goodsclassstapleService.getObjById(Long.valueOf(Long.parseLong(id))).getGc();
+			obj = this.goodsclassstapleService.getObjById(
+					Long.valueOf(Long.parseLong(id))).getGc();
 		if ((name != null) && (!name.equals("")))
 			obj = this.goodsClassService.getObjByProperty("className", name);
 		List list = new ArrayList();
@@ -959,7 +1030,8 @@ public class GoodsSellerAction {
 			if (obj.getLevel() == 2) {
 				params.put("pid", obj.getParent().getParent().getId());
 				List<GoodsClass> second_gcs = this.goodsClassService
-						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc", params, -1, -1);
+						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc",
+								params, -1, -1);
 				for (GoodsClass gc1 : second_gcs) {
 					Map map = new HashMap();
 					map.put("id", gc1.getId());
@@ -969,8 +1041,10 @@ public class GoodsSellerAction {
 				params.clear();
 				params.put("pid", obj.getParent().getId());
 				List<GoodsClass> third_gcs = this.goodsClassService
-						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc", params, -1, -1);
-				for (GoodsClass gc1 : third_gcs) { // gc = (GoodsClass)map.next();
+						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc",
+								params, -1, -1);
+				for (GoodsClass gc1 : third_gcs) { // gc =
+													// (GoodsClass)map.next();
 					Map map = new HashMap();
 					map.put("id", ((GoodsClass) gc1).getId());
 					map.put("className", ((GoodsClass) gc1).getClassName());
@@ -982,7 +1056,8 @@ public class GoodsSellerAction {
 				params.clear();
 				params.put("pid", obj.getParent().getId());
 				List<GoodsClass> third_gcs = this.goodsClassService
-						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc", params, -1, -1);
+						.query("select obj from GoodsClass obj where obj.parent.id=:pid order by obj.sequence asc",
+								params, -1, -1);
 				for (GoodsClass gc1 : third_gcs) {
 					// GoodsClass gc = (GoodsClass)((Iterator)gc).next();
 					Map map = new HashMap();
@@ -994,7 +1069,8 @@ public class GoodsSellerAction {
 
 			Map map = new HashMap();
 			String staple_info = generic_goods_class_info(obj);
-			map.put("staple_info", staple_info.substring(0, staple_info.length() - 1));
+			map.put("staple_info",
+					staple_info.substring(0, staple_info.length() - 1));
 			other_list.add(map);
 
 			list.add(second_list);

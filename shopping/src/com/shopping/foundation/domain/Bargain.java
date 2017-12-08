@@ -11,9 +11,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 特价
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -26,19 +28,19 @@ public class Bargain extends IdEntity {
 	 */
 	private static final long serialVersionUID = -7595750284812779918L;
 
-	//特价时间
+	// 特价时间
 	@Temporal(TemporalType.DATE)
 	private Date bargain_time;
-	
-	//折扣
+
+	// 折扣
 	@Column(precision = 3, scale = 2)
 	private BigDecimal rebate;
 
-	//最大值
+	// 最大值
 	@Column(columnDefinition = "int default 0")
 	private int maximum;
-	
-	//状态
+
+	// 状态
 	@Column(columnDefinition = "LongText")
 	private String state;
 

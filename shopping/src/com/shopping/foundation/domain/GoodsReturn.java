@@ -21,19 +21,19 @@ public class GoodsReturn extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//返回ID
+
+	// 返回ID
 	private String return_id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OrderForm of;
-	//货物返回项目
+	// 货物返回项目
 	@OneToMany(mappedBy = "gr", cascade = { javax.persistence.CascadeType.REMOVE })
 	private List<GoodsReturnItem> items = new ArrayList<GoodsReturnItem>();
-	//使用者
+	// 使用者
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	//返回信息
+	// 返回信息
 	@Column(columnDefinition = "LongText")
 	private String return_info;
 

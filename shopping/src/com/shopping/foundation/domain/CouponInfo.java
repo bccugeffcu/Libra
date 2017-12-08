@@ -9,9 +9,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 优惠券信息
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,19 +24,19 @@ public class CouponInfo extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 9035884340618991295L;
-	
-	//优惠券码
+
+	// 优惠券码
 	private String coupon_sn;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//优惠券
+
+	// 优惠券
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Coupon coupon;
-	
-	//优惠券状态
+
+	// 优惠券状态
 	@Column(columnDefinition = "int default 0")
 	private int status;
 

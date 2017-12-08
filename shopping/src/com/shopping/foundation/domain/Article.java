@@ -19,22 +19,22 @@ public class Article extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -8847246543488664326L;
-	
-	//文章标题
+
+	// 文章标题
 	private String title;
-	//文章类
+	// 文章类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ArticleClass articleClass;
-	//文章地址
+	// 文章地址
 	private String url;
-	//文章序列
+	// 文章序列
 	private int sequence;
-	//文章是否显示
+	// 文章是否显示
 	private boolean display;
-	//文字标记
+	// 文字标记
 	private String mark;
-	
-	//文章内容
+
+	// 文章内容
 	@Lob
 	@Column(columnDefinition = "LongText")
 	private String content;

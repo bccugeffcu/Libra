@@ -23,48 +23,48 @@ public class GoodsClass extends IdEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//类型名称
+	// 类型名称
 	private String className;
 
-	//商品子分类
+	// 商品子分类
 	@OneToMany(mappedBy = "parent")
 	@OrderBy("sequence asc")
 	private List<GoodsClass> childs = new ArrayList<GoodsClass>();
-	
-	//商品父类
+
+	// 商品父类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private GoodsClass parent;
 	private int sequence;
-	//水平等级
+	// 水平等级
 	private int level;
-	//是否展示
+	// 是否展示
 	private boolean display;
-	//是否推荐
+	// 是否推荐
 	private boolean recommend;
-	
-	//货物类型
+
+	// 货物类型
 	@ManyToOne(fetch = FetchType.LAZY)
 	private GoodsType goodsType;
 
-	//seo关键字
+	// seo关键字
 	@Column(columnDefinition = "LongText")
 	private String seo_keywords;
 
-	//seo描述
+	// seo描述
 	@Column(columnDefinition = "LongText")
 	private String seo_description;
-	
-	//货物集合
+
+	// 货物集合
 	@OneToMany(mappedBy = "gc")
 	private List<Goods> goods_list = new ArrayList<Goods>();
-	
+
 	@OneToMany(mappedBy = "gc")
 	private List<GoodsClassStaple> gcss = new ArrayList<GoodsClassStaple>();
-	
-	//图标类型
+
+	// 图标类型
 	@Column(columnDefinition = "int default 0")
 	private int icon_type;
-	//图标系统
+	// 图标系统
 	private String icon_sys;
 
 	@OneToOne

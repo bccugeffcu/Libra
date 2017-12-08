@@ -14,9 +14,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 广告位置
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -27,44 +29,44 @@ public class AdvertPosition extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -1117523364516997731L;
-	
-	//广告位置标题
+
+	// 广告位置标题
 	private String ap_title;
 
 	@Column(columnDefinition = "LongText")
 	private String ap_content;
-	//广告类型
+	// 广告类型
 	private String ap_type;
-	//广告状态
+	// 广告状态
 	private int ap_status;
-	//广告是否在使用
+	// 广告是否在使用
 	private int ap_use_status;
-	//广告宽度
+	// 广告宽度
 	private int ap_width;
-	//广告高度
+	// 广告高度
 	private int ap_height;
-	//广告价格
+	// 广告价格
 	private int ap_price;
-	//广告类型
+	// 广告类型
 	private int ap_sale_type;
-	//系统类型
+	// 系统类型
 	private int ap_sys_type;
-	//显示类型
+	// 显示类型
 	private int ap_show_type;
-	
-	//附件
+
+	// 附件
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory ap_acc;
-	//广告内容
+	// 广告内容
 	private String ap_text;
-	//广告地址
+	// 广告地址
 	private String ap_acc_url;
-	
-	//广告代码
+
+	// 广告代码
 	@Column(columnDefinition = "LongText")
 	private String ap_code;
-	
-	//广告
+
+	// 广告
 	@OneToMany(mappedBy = "ad_ap", cascade = { javax.persistence.CascadeType.REMOVE })
 	@OrderBy("ad_slide_sequence asc")
 	private List<Advert> advs = new ArrayList<Advert>();

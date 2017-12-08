@@ -8,9 +8,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 收藏
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -21,18 +23,18 @@ public class Favorite extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -6806868000509737275L;
-	//类型
+	// 类型
 	private int type;
-	
-	//商品
+
+	// 商品
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Goods goods;
-	
-	//店铺
+
+	// 店铺
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Store store;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 

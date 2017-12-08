@@ -9,9 +9,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 组合聊天
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,11 +24,11 @@ public class CombinLog extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 6386087245825092486L;
-	//开始时间
+	// 开始时间
 	private Date begin_time;
-	//结束时间
+	// 结束时间
 	private Date end_time;
-	//金币
+	// 金币
 	private int gold;
 
 	@ManyToOne(fetch = FetchType.LAZY)

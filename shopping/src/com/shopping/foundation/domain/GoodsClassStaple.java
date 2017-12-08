@@ -17,14 +17,14 @@ public class GoodsClassStaple extends IdEntity {
 	 * 用户常用商品分类
 	 */
 
-	//名称
+	// 名称
 	private String name;
-	
-	//货物类型
+
+	// 货物类型
 	@ManyToOne(fetch = FetchType.LAZY)
 	private GoodsClass gc;
 
-	//商店
+	// 商店
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Store store;
 

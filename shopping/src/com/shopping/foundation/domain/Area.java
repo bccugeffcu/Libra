@@ -12,9 +12,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 地区
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -25,21 +27,21 @@ public class Area extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -3166365941305570434L;
-	//地区名称
+	// 地区名称
 	private String areaName;
-	
-	//地区子类
+
+	// 地区子类
 	@OneToMany(mappedBy = "parent", cascade = { javax.persistence.CascadeType.REMOVE })
 	private List<Area> childs = new ArrayList<Area>();
-	//地区父类
+	// 地区父类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Area parent;
-	//地区序列
+	// 地区序列
 	private int sequence;
-	//地区等级
+	// 地区等级
 	private int level;
-	
-	//是否常用地区
+
+	// 是否常用地区
 	@Column(columnDefinition = "bit default false")
 	private boolean common;
 

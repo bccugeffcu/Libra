@@ -7,9 +7,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 举报主题
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -20,13 +22,13 @@ public class ComplaintSubject extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -4022101705095993582L;
-	//类型
+	// 类型
 	private String type;
-	
-	//标题
+
+	// 标题
 	private String title;
-	
-	//内容
+
+	// 内容
 	@Column(columnDefinition = "LongText")
 	private String content;
 

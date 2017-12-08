@@ -11,9 +11,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 金币日志
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -24,34 +26,34 @@ public class GoldLog extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -609688280077748888L;
-	//类型
+	// 类型
 	private int gl_type;
-	//金额
+	// 金额
 	private int gl_money;
-	//数量
+	// 数量
 	private int gl_count;
-	//支付
+	// 支付
 	private String gl_payment;
-	
-	//内容
+
+	// 内容
 	@Column(columnDefinition = "LongText")
 	private String gl_content;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User gl_user;
-	
-	//管理
+
+	// 管理
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User gl_admin;
-	//时间
+	// 时间
 	private Date gl_admin_time;
-	
-	//内容
+
+	// 内容
 	@Column(columnDefinition = "LongText")
 	private String gl_admin_content;
-	
-	//金币记录
+
+	// 金币记录
 	@OneToOne(fetch = FetchType.LAZY)
 	private GoldRecord gr;
 

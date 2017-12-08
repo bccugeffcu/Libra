@@ -16,9 +16,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 优惠券
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -29,33 +31,33 @@ public class Coupon extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 4988110222207115350L;
-	
-	//优惠券名字
+
+	// 优惠券名字
 	private String coupon_name;
-	
-	//优惠券金额
+
+	// 优惠券金额
 	@Column(precision = 12, scale = 2)
 	private BigDecimal coupon_amount;
-	
-	//开始时间
+
+	// 开始时间
 	@Temporal(TemporalType.DATE)
 	private Date coupon_begin_time;
-	
-	//结束时间
+
+	// 结束时间
 	@Temporal(TemporalType.DATE)
 	private Date coupon_end_time;
-	//优惠数量
+	// 优惠数量
 	private int coupon_count;
-	
-	//优惠订单金额
+
+	// 优惠订单金额
 	@Column(precision = 12, scale = 2)
 	private BigDecimal coupon_order_amount;
-	
-	//附件
+
+	// 附件
 	@OneToOne(fetch = FetchType.LAZY, cascade = { javax.persistence.CascadeType.REMOVE })
 	private Accessory coupon_acc;
-	
-	//优惠信息
+
+	// 优惠信息
 	@OneToMany(mappedBy = "coupon", cascade = { javax.persistence.CascadeType.REMOVE })
 	private List<CouponInfo> couponinfos = new ArrayList<CouponInfo>();
 

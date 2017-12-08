@@ -10,9 +10,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 物流公司
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -23,28 +25,27 @@ public class ExpressCompany extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = -6688349848432902438L;
-	//公司名称
+	// 公司名称
 	private String company_name;
-	//公司标示
+	// 公司标示
 	private String company_mark;
-	
-	//公司序列
+
+	// 公司序列
 	@Column(columnDefinition = "int default 0")
 	private int company_sequence;
-	
-	//公司类型
+
+	// 公司类型
 	@Column(columnDefinition = "varchar(255) default 'EXPRESS'")
 	private String company_type;
-	
-	//公司状态
+
+	// 公司状态
 	@Column(columnDefinition = "int default 0")
 	private int company_status;
-	
-	//订单
+
+	// 订单
 	@OneToMany(mappedBy = "ec")
 	List<OrderForm> ofs = new ArrayList<OrderForm>();
-	
-	
+
 	public List<OrderForm> getOfs() {
 		return this.ofs;
 	}

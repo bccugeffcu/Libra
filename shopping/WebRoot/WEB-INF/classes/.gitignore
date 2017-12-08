@@ -1,9 +1,0 @@
-/META-INF/
-/applicationContext-configuration.xml
-/applicationContext-security.xml
-/com/
-/config.properties
-/ehcache.xml
-/jdbc.properties
-/log4j.properties
-/persistence.xml

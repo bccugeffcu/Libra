@@ -9,9 +9,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.shopping.core.domain.IdEntity;
+
 /**
  * 聊天日志
- * @author 
+ * 
+ * @author
  *
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -23,20 +25,20 @@ public class ChattingLog extends IdEntity {
 	 * UID
 	 */
 	private static final long serialVersionUID = 6666793243500574372L;
-	
-	//聊天
+
+	// 聊天
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Chatting chatting;
-	
-	//用户
+
+	// 用户
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//聊天内容
+
+	// 聊天内容
 	@Column(columnDefinition = "LongText")
 	private String content;
-	
-	//标记
+
+	// 标记
 	@Column(columnDefinition = "int default 0")
 	private int mark;
 

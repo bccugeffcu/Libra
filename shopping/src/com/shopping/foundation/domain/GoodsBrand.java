@@ -26,50 +26,50 @@ public class GoodsBrand extends IdEntity {
 	 * 商品品牌
 	 */
 	private static final long serialVersionUID = 5608767062084760770L;
-	//名称
+	// 名称
 	private String name;
-	//序列
+	// 序列
 	private int sequence;
-	
-	//品牌logo
+
+	// 品牌logo
 	@OneToOne(fetch = FetchType.LAZY)
 	private Accessory brandLogo;
-	//是否推荐
+	// 是否推荐
 	private boolean recommend;
-	
-	//审计
+
+	// 审计
 	@Column(columnDefinition = "int default 0")
 	private int audit;
-	
-	//使用者身份
+
+	// 使用者身份
 	@Column(columnDefinition = "int default 0")
 	private int userStatus;
 
-	//使用者
+	// 使用者
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
-	
-	//评论
+
+	// 评论
 	@Column(columnDefinition = "LongText")
 	private String remark;
 
-	//商品种类集合
+	// 商品种类集合
 	@ManyToMany(mappedBy = "gbs")
 	private List<GoodsType> types = new ArrayList<GoodsType>();
-	
-	//商品品牌种类
+
+	// 商品品牌种类
 	@ManyToOne(fetch = FetchType.LAZY)
 	private GoodsBrandCategory category;
-	
-	//商品集合
+
+	// 商品集合
 	@OneToMany(mappedBy = "goods_brand")
 	private List<Goods> goods_list = new ArrayList<Goods>();
-	
-	//是否在微信店铺推荐
+
+	// 是否在微信店铺推荐
 	@Column(columnDefinition = "bit default false")
 	private boolean weixin_shop_recommend;
-	
-	//微信店铺推荐时间
+
+	// 微信店铺推荐时间
 	@Temporal(TemporalType.DATE)
 	private Date weixin_shop_recommendTime;
 	private String first_word;
